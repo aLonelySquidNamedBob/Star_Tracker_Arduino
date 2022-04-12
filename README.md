@@ -24,16 +24,4 @@ The ball head mount was the cheapest one I could find on Amazon with widely favo
 
 ## RPM function
 
-For the formulas, please visit README.ipynb
-
-The Earth peforms one sidereal rotation every 23 hours 56 minutes and 4.1 seconds, thus the Earth's angular velocity $\omega$ can be calculated as such:
-$$ \omega = \frac{360}{23 + 56 \times 60 + 4.1 \times 3600} \approx 15.041068 $$
-Let $r$ be the radius of the bent threaded rod, or rather the distance between the pivot point and the bent rod and $d$ the distance travelled along that rod in one hour of rotation:
-$$ d = 2 \pi r \times \frac{\omega}{360} = \frac{2 \pi r \omega}{360} $$
-The pitch of the nut on the threaded rod is of 1 mm per turn, thus the number of revolutions $n_{nut rotations} = d$.  
-We now need the ratio between the two gears: the motor gear has 20 teeth and the nut gear has 80 teeth, therefore the ratio is $\frac{n_{nut gear teeth}}{n_{motor gear teeth}}$  
-Last of all, we can figure out the number of rotations of the motor $n_{motor rotations}$ with the following formula: 
-$$ n_{motor rotations} = n_{nut rotations} \times \frac{n_{nut gear teeth}}{n_{motor gear teeth}} = \frac{n_{nut gear teeth}}{n_{motor gear teeth}} d $$
-With that last piece of information, we can tie everything together in this equation:
-$$ n_{motor rotations} = \frac{2 \pi r \omega \frac{n_{nut gear teeth}}{n_{motor gear teeth}}}{360 \times 60} $$ 
-$$  n_{motor rotations} = \frac{\pi r \omega \frac{n_{nut gear teeth}}{n_{motor gear teeth}}}{10800} $$
+For this section, please visit [README.ipynb](https://github.com/aLonelySquidNamedBob/Star_Tracker_Arduino/blob/main/README.ipynb)
