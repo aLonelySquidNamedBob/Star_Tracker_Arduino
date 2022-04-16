@@ -20,27 +20,33 @@ const int _steps = 4096;
 ////////// VARIABLES //////////
 
 float rpm;
-Stepper stepper(_steps, _motorPins[0], _motorPins[1], _motorPins[2], _motorPins[3]);
+bool microstepping;
+Stepper stepper(_steps, _motorPins[0], _motorPins[1], _motorPins[2], _motorPins[3], true);
 
 ////////// FUNCTIONS //////////
 
 // For information on this equation, go to https://github.com/aLonelySquidNamedBob/Star_Tracker_Arduino
 float RotationsPerMinute(int radius, float earthRotation, int motorTeeth, int gearTeeth) {
-    return (PI * radius * earthRotation * (gearTeeth / motorTeeth)) / 10800;
+  return (PI * radius * earthRotation * (gearTeeth / motorTeeth)) / 10800;
 }
 
 ////////// SETUP AND LOOP //////////
 
 void setup() {
-    rpm = RotationsPerMinute(radius, _angularVelocity, _motorTeeth, _gearTeeth);
-    stepper.setSpeed(rpm);
-    // Initialize all pins to LOW
-    for (int i = 0; i < 4; i++) {
-        digitalWrite(_motorPins[i], LOW);
-    }
+  if (_steps == 4096) {
+    stepper.microstepping = true;
+  } else {
+    stepper.microstepping = false;
+  }
+  rpm = RotationsPerMinute(radius, _angularVelocity, _motorTeeth, _gearTeeth);
+  stepper.setSpeed(rpm);
+  // Initialize all pins to LOW
+  for (int i = 0; i < 4; i++) {
+    digitalWrite(_motorPins[i], LOW);
+  }
 }
 
 void loop() {
-    // Step forever
-    stepper.step(_steps);
+  // Step forever
+  stepper.step(_steps);
 }
